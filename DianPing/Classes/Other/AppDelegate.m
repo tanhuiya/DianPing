@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "UMSocialData.h"
+#import "MTDealsViewController.h"
+#import "MTNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +20,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    MTDealsViewController* dealVc=[[MTDealsViewController alloc]init];
+    self.window.rootViewController=[[MTNavigationController alloc]initWithRootViewController:dealVc];
+    [self.window makeKeyAndVisible];
+    [UMSocialData setAppKey:UMKEY];
     return YES;
 }
 

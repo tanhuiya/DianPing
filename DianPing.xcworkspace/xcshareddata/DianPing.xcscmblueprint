@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "48CC2A6D1A7D79EDF9B452B80C03878A9C67031F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "48CC2A6D1A7D79EDF9B452B80C03878A9C67031F" : 0,
+    "3A36FE12AED7325CE464409BBA8A132662964887" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EE43158C-87AF-4416-AEF7-AF78D5CE6E0D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "48CC2A6D1A7D79EDF9B452B80C03878A9C67031F" : "DianPing\/",
+    "3A36FE12AED7325CE464409BBA8A132662964887" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DianPing",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "DianPing.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/tanhuiya\/iOS-GitHub.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3A36FE12AED7325CE464409BBA8A132662964887"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:tanhuiya\/DianPing.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "48CC2A6D1A7D79EDF9B452B80C03878A9C67031F"
+    }
+  ]
+}
