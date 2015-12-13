@@ -85,8 +85,7 @@
     UIScrollView* sc=(UIScrollView*)self.view;
     sc.contentSize=CGSizeMake(0, ContentY);
 
-    self.preferredContentSize=self.view.frame.size;
-    
+    self.view.backgroundColor=[UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

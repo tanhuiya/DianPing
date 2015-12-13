@@ -21,7 +21,10 @@
 @implementation DealListController
 -(instancetype)init{
     UICollectionViewFlowLayout* flowout=[[UICollectionViewFlowLayout alloc]init];
-    flowout.itemSize=CGSizeMake(305, 305);
+    CGFloat width=([UIScreen mainScreen].bounds.size.width-3*5)*0.5;
+    flowout.itemSize=CGSizeMake(width , width+30);
+    flowout.minimumInteritemSpacing=5;
+    flowout.minimumLineSpacing=5;
     return [super initWithCollectionViewLayout:flowout];
 }
 
@@ -73,18 +76,18 @@ static NSString * const reuseIdentifier = @"Cell";
 //    [super viewDidAppear:animated];
 //    [self setupLayout:self.view.width InterfaceOrientation:self.interfaceOrientation];
 //}
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self setupLayout:self.view.width InterfaceOrientation:self.interfaceOrientation];
-}
+//-(void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    [self setupLayout:self.view.width InterfaceOrientation:self.interfaceOrientation];
+//}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     self.emptyview.hidden=self.deals.count!=0;
     return self.deals.count;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-//    DetailDealController* controller=[[DetailDealController alloc]init];
-//    controller.deal=self.deals[indexPath.item];
-//    [self presentViewController:controller animated:YES completion:nil];
+    DetailDealController* controller=[[DetailDealController alloc]init];
+    controller.deal=self.deals[indexPath.item];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     DealViewCell* cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"deal" forIndexPath:indexPath];

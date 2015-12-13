@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C2513" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CitySelectedController">
@@ -18,13 +19,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yts-dJ-kp4" userLabel="导航栏">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                    <rect key="frame" x="0.0" y="20" width="320" height="62"/>
                     <subviews>
                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigationBar_normal" translatesAutoresizingMaskIntoConstraints="NO" id="mrZ-Zt-oah">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                            <animations/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="er4-DV-qMs">
                             <rect key="frame" x="0.0" y="0.0" width="62" height="62"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="62" id="hD0-4o-D83"/>
                             </constraints>
@@ -38,11 +41,13 @@
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="切换城市" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHo-Kd-6E5">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                            <animations/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="oHo-Kd-6E5" secondAttribute="trailing" id="1Qs-04-6Ft"/>
@@ -60,7 +65,8 @@
                     </constraints>
                 </view>
                 <searchBar contentMode="redraw" backgroundImage="bg_login_textfield" translatesAutoresizingMaskIntoConstraints="NO" id="xI2-Z8-08H">
-                    <rect key="frame" x="0.0" y="72" width="320" height="40"/>
+                    <rect key="frame" x="0.0" y="92" width="320" height="40"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="r7f-uz-czn"/>
                     </constraints>
@@ -70,7 +76,8 @@
                     </connections>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="N4S-Tt-gZf">
-                    <rect key="frame" x="0.0" y="122" width="320" height="358"/>
+                    <rect key="frame" x="0.0" y="142" width="320" height="338"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="R46-rJ-sav"/>
@@ -78,13 +85,15 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJT-8N-0mk">
-                    <rect key="frame" x="0.0" y="122" width="320" height="358"/>
+                    <rect key="frame" x="0.0" y="142" width="320" height="338"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Yts-dJ-kp4" secondAttribute="trailing" id="1JY-BG-0xi"/>
@@ -98,7 +107,7 @@
                 <constraint firstAttribute="trailing" secondItem="xI2-Z8-08H" secondAttribute="trailing" id="NC8-gw-zZl"/>
                 <constraint firstItem="N4S-Tt-gZf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="a3l-q1-J6j"/>
                 <constraint firstItem="WJT-8N-0mk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="maC-XK-Q2V"/>
-                <constraint firstItem="Yts-dJ-kp4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="r6w-Oc-Gqs"/>
+                <constraint firstItem="Yts-dJ-kp4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="r6w-Oc-Gqs"/>
                 <constraint firstItem="xI2-Z8-08H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="r7s-Zs-ETO"/>
                 <constraint firstAttribute="trailing" secondItem="N4S-Tt-gZf" secondAttribute="trailing" id="yYN-kP-d1a"/>
             </constraints>

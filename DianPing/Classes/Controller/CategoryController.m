@@ -38,7 +38,7 @@
     if([cates[mainIndex] subcategories].count==0){
         [[NSNotificationCenter defaultCenter]postNotificationName:CategorySelectedNotification object:nil userInfo:@{CategoryParam:cates[mainIndex]}];
         [self dismissViewControllerAnimated:YES completion:nil];
-
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 -(void)clickWithMainIndex:(int)mainIndex andSubIndex:(int)subIndex{
@@ -50,7 +50,7 @@
 
     [[NSNotificationCenter defaultCenter]postNotificationName:CategorySelectedNotification object:nil userInfo:dict];
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)setSelectedCategory:(MTCategory *)selectedCategory{

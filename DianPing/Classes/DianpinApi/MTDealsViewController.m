@@ -37,9 +37,7 @@
 @property(strong,nonatomic)DealsTopMenu *CategoryMenu;
 @property(strong,nonatomic)DealsTopMenu *CityMenu;
 @property(strong,nonatomic)DealsTopMenu *SortMenu;
-//@property(nonatomic,strong)UIPopoverController* regionPop;
-//@property(nonatomic,strong)UIPopoverController* categoryPop;
-//@property(nonatomic,strong)UIPopoverController* SortPop;
+
 
 @property(nonatomic,strong)City* selectedCity;
 @property(nonatomic,strong)Region* selectedRegion;
@@ -58,29 +56,19 @@
 @implementation MTDealsViewController
 
 
-//-(UIPopoverController *)regionPop{
-//    if(!_regionPop){
-//        RegionViewController* regionVC=[[RegionViewController alloc]init];
-//        
-//        self.regionPop=[[UIPopoverController alloc]initWithContentViewController:regionVC];
-//        
-//
-//    }
-//    return _regionPop;
-//}
-//-(UIPopoverController *)categoryPop{
-//    if(!_categoryPop){
-//        CategoryController* categoryVC=[[CategoryController alloc]init];
-//        self.categoryPop=[[UIPopoverController alloc]initWithContentViewController:categoryVC];
-//    }
-//    return _categoryPop;
-//}-(UIPopoverController *)SortPop{
-//    if(!_SortPop){
-//        SortViewController* sortVC=[[SortViewController alloc]init];
-//        self.SortPop=[[UIPopoverController alloc]initWithContentViewController:sortVC];
-//    }
-//    return _SortPop;
-//}
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    //从沙盒加载
+    self.selectedCity=[[MetaDataTool shardWithDataTool]getLastCity];
+    self.selectedSort=[[MetaDataTool shardWithDataTool]getLastSort];
+    [self setCollectionView];
+    [self setNotes];
+    [self setupPath];
+    [self setNavBar];
+    
+}
+
 
 -(AwesomeMenuItem*)itemWithContentImage:(NSString*)content andHighlight:(NSString*)contentHighlight{
     UIImage *bgMenuItemImage = [UIImage imageNamed:@"bg_pathMenu_black_normal"];
@@ -88,60 +76,59 @@
     return  [[AwesomeMenuItem alloc]initWithImage:bgMenuItemImage highlightedImage:nil ContentImage:[UIImage imageNamed:content] highlightedContentImage:[UIImage imageNamed:contentHighlight]];
 }
 -(void)setNotes{
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sortClicked:) name:SortSelectedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(cityClicked:) name:CitySelectedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(regionClicked:) name:RegionSelectedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(categoryClicked:) name:CategorySelectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sortClicked:) name:SortSelectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(cityClicked:) name:CitySelectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(regionClicked:) name:RegionSelectedNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(categoryClicked:) name:CategorySelectedNotification object:nil];
 }
 
 //
-//-(void)cityClicked:(NSNotification*)note{
-//    [self.regionPop dismissPopoverAnimated:YES];
+-(void)cityClicked:(NSNotification*)note{
 //    RegionViewController* rvc=(RegionViewController*) self.regionPop.contentViewController;
 //    rvc.city=note.userInfo[CityParam];
-//    
-//    self.CityMenu.Title.text=[note.userInfo[CityParam] name];
-//    self.selectedCity=note.userInfo[CityParam];
-//    self.selectedRegion=[self.selectedCity.regions firstObject];
-//    self.CityMenu.Title.text=[NSString stringWithFormat:@"%@-全部",self.selectedCity.name];
-//    self.CityMenu.SubTitle.text=nil;
+    
+    self.CityMenu.Title.text=[note.userInfo[CityParam] name];
+    self.selectedCity=note.userInfo[CityParam];
+    self.selectedRegion=[self.selectedCity.regions firstObject];
+    self.CityMenu.Title.text=[NSString stringWithFormat:@"%@-全部",self.selectedCity.name];
+    self.CityMenu.SubTitle.text=nil;
+    [self loadNewDeals];
+    [self.collectionView.header beginRefreshing];
+    //存储最近使用城市
+    [[MetaDataTool shardWithDataTool]addCityRecent:self.selectedCity];
+
+}
+-(void)sortClicked:(NSNotification*)note{
+    Sort* sort= note.userInfo[SortParam];
+    self.SortMenu.SubTitle.text=sort.label;
+    self.selectedSort=sort;
 //    [self loadNewDeals];
-//    [self.collectionView.header beginRefreshing];
-//    //存储最近使用城市
-//    [[MetaDataTool shardWithDataTool]addCityRecent:self.selectedCity];
-//
-//}
-//-(void)sortClicked:(NSNotification*)note{
-//    Sort* sort= note.userInfo[SortParam];
-//    self.SortMenu.SubTitle.text=sort.label;
-//    self.selectedSort=sort;
+    [self.collectionView.header beginRefreshing];
+    [[MetaDataTool shardWithDataTool]saveSort:sort];
+}
+-(void)regionClicked:(NSNotification*)note{
+    Region* region= note.userInfo[RegionParam];
+    NSString* subregion= note.userInfo[SubRegionParam];
+    NSString* title=[NSString stringWithFormat:@"%@-%@",self.selectedCity.name ,region.name];
+    self.CityMenu.Title.text=title;
+    self.CityMenu.SubTitle.text=subregion;
+    self.selectedRegion=region;
+    self.selectedSubRegion=subregion;
 //    [self loadNewDeals];
-//    [self.collectionView.header beginRefreshing];
-//    [[MetaDataTool shardWithDataTool]saveSort:sort];
-//}
-//-(void)regionClicked:(NSNotification*)note{
-//    Region* region= note.userInfo[RegionParam];
-//    NSString* subregion= note.userInfo[SubRegionParam];
-//    NSString* title=[NSString stringWithFormat:@"%@-%@",self.selectedCity.name ,region.name];
-//    self.CityMenu.Title.text=title;
-//    self.CityMenu.SubTitle.text=subregion;
-//    self.selectedRegion=region;
-//    self.selectedSubRegion=subregion;
+    [self.collectionView.header beginRefreshing];
+}
+-(void)categoryClicked:(NSNotification*)note{
+    MTCategory* category= note.userInfo[CategoryParam];
+    NSString* subcate= note.userInfo[CategorySubParam];
+    self.CategoryMenu.Title.text=category.title;
+    self.CategoryMenu.SubTitle.text=subcate;
+    self.selectedCategory=category;
+    self.selectedSubCategory=subcate;
 //    [self loadNewDeals];
-//    [self.collectionView.header beginRefreshing];
-//}
-//-(void)categoryClicked:(NSNotification*)note{
-//    MTCategory* category= note.userInfo[CategoryParam];
-//    NSString* subcate= note.userInfo[CategorySubParam];
-//    self.CategoryMenu.Title.text=category.title;
-//    self.CategoryMenu.SubTitle.text=subcate;
-//    self.selectedCategory=category;
-//    self.selectedSubCategory=subcate;
-//    [self loadNewDeals];
-//    [self.collectionView.header beginRefreshing];
-//    
-////    [[MetaDataTool shardWithDataTool]saveCategory:category];
-//}
+    [self.collectionView.header beginRefreshing];
+    
+//    [[MetaDataTool shardWithDataTool]saveCategory:category];
+}
 -(FindDealsParam*)getFindDeal{
     FindDealsParam* params=[[FindDealsParam alloc]init];
     
@@ -169,7 +156,9 @@
             if(self.selectedRegion.subregions.count==0){
                 params.region=self.selectedRegion.name;
             }else{
-                params.region=self.selectedSubRegion;
+                if(![self.selectedSubRegion isEqualToString:@"全部"]){
+                    params.region=self.selectedSubRegion;
+                }
             }
         }
     }
@@ -243,20 +232,6 @@
     [self.collectionView.header beginRefreshing];
     
 }
--(void)viewDidLoad{
-    [super viewDidLoad];
-    //从沙盒加载
-    self.selectedCity=[[MetaDataTool shardWithDataTool]getLastCity];
-//    RegionViewController* regionVC=(RegionViewController*)self.regionPop.contentViewController;
-//    regionVC.city=self.selectedCity;
-
-    self.selectedSort=[[MetaDataTool shardWithDataTool]getLastSort];
-    [self setCollectionView];
-    [self setNotes];
-    [self setupPath];
-    [self setNavBar];
-
-}
 
 //-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
 //    
@@ -272,14 +247,14 @@
     self.navigationItem.rightBarButtonItems=@[Map_item,Serach_item];
 }
 -(void)setLeftBarButton{
-    UIBarButtonItem* Icon=[UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_meituan_logo" highImage:@"icon_meituan_logo"];
-    Icon.enabled=NO;
+//    UIBarButtonItem* Icon=[UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_meituan_logo" highImage:@"icon_meituan_logo"];
+//    Icon.enabled=NO;
     DealsTopMenu* CategoryMenu=[DealsTopMenu menu];
     [CategoryMenu.imageButton setImage:[UIImage imageNamed:@"icon_category_highlighted_0"] forState:UIControlStateHighlighted];
     [CategoryMenu.imageButton setImage:[UIImage imageNamed:@"icon_category_0"] forState:UIControlStateNormal];
     CategoryMenu.Title.text=@"分类";
     CategoryMenu.SubTitle.text=@"全部";
-//    [CategoryMenu addTarget:self selector:@selector(categoryMenuClicked)];
+    [CategoryMenu addTarget:self selector:@selector(categoryMenuClicked)];
     UIBarButtonItem* item1=[[UIBarButtonItem alloc]initWithCustomView:CategoryMenu];
     self.CategoryMenu=CategoryMenu;
     DealsTopMenu* CityMenu=[DealsTopMenu menu];
@@ -287,7 +262,7 @@
     [CityMenu.imageButton setImage:[UIImage imageNamed:@"icon_district"] forState:UIControlStateNormal];
         CityMenu.Title.text=[NSString stringWithFormat:@"%@-全部",self.selectedCity.name];
     CityMenu.SubTitle.text=@"地区";
-//    [CityMenu addTarget:self selector:@selector(regionMenuClicked)];
+    [CityMenu addTarget:self selector:@selector(regionMenuClicked)];
     UIBarButtonItem* item2=[[UIBarButtonItem alloc]initWithCustomView:CityMenu];
     self.CityMenu=CityMenu;
     DealsTopMenu* SortMenu=[DealsTopMenu menu];
@@ -295,32 +270,34 @@
     [SortMenu.imageButton setImage:[UIImage imageNamed:@"icon_sort"] forState:UIControlStateNormal];
     SortMenu.Title.text=@"排序";
     SortMenu.SubTitle.text=self.selectedSort.label;
-//    [SortMenu addTarget:self selector:@selector(sortMenuClicked)];
+    [SortMenu addTarget:self selector:@selector(sortMenuClicked)];
     UIBarButtonItem* item3=[[UIBarButtonItem alloc]initWithCustomView:SortMenu];
     self.SortMenu=SortMenu;
-    self.navigationItem.leftBarButtonItems=@[Icon,item1,item2,item3];
+    self.navigationItem.leftBarButtonItems=@[item1,item2,item3];
 }
 #pragma mark - 左边导航栏
-//-(void)categoryMenuClicked{
-//    CategoryController* categoryVC=(CategoryController*)self.categoryPop.contentViewController;
-//    categoryVC.selectedCategory=self.selectedCategory;
-//    categoryVC.selectedSubCategory=self.selectedSubCategory;
+-(void)categoryMenuClicked{
+    CategoryController* categoryVC=[[CategoryController alloc]init];;
+    categoryVC.selectedCategory=self.selectedCategory;
+    categoryVC.selectedSubCategory=self.selectedSubCategory;
+    [self.navigationController pushViewController:categoryVC animated:YES];
 //    [self.categoryPop presentPopoverFromRect:self.CategoryMenu.bounds inView:self.CategoryMenu permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//}
-//-(void)regionMenuClicked{
-//    RegionViewController* regionVC=(RegionViewController*)self.regionPop.contentViewController;
-//    regionVC.selectedRegion=self.selectedRegion;
-//    regionVC.selectedSubRegion=self.selectedSubRegion;
-//    
+}
+-(void)regionMenuClicked{
+    RegionViewController* regionVC=[[RegionViewController alloc]init];;
+    regionVC.selectedRegion=self.selectedRegion;
+    regionVC.selectedSubRegion=self.selectedSubRegion;
+    regionVC.city=self.selectedCity;
+    [self.navigationController pushViewController:regionVC animated:NO];
 //    [self.regionPop presentPopoverFromRect:self.CityMenu.bounds inView:self.CityMenu permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 
+}
     
-    
-//}-(void)sortMenuClicked{
-//    SortViewController* sortVC=(SortViewController*)self.SortPop.contentViewController;
-//    sortVC.selectedSort=self.selectedSort;
-//    [self.SortPop presentPopoverFromRect:self.SortMenu.bounds inView:self.SortMenu permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-//}
+-(void)sortMenuClicked{
+    SortViewController* sortVC=[[SortViewController alloc]init];
+    sortVC.selectedSort=self.selectedSort;
+    [self.navigationController pushViewController:sortVC animated:YES];
+}
 -(NSString *)imageName{
     return @"icon_deals_empty";
 }

@@ -35,7 +35,11 @@
     }
     return _cityGroups;
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES  animated: YES];
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addChildViewController:self.filterCityVC];
@@ -113,12 +117,11 @@
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
     [searchBar endEditing:YES];
 }
--(BOOL)disablesAutomaticKeyboardDismissal{
-    return NO;
-}
+
 
 
 - (IBAction)closeButtonClick:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

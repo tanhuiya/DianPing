@@ -55,9 +55,9 @@
     NSString* str=[NSString stringWithFormat:@"[%@]  %@  %@ ",self.Title.text,self.decs.text,self.deal.deal_h5_url];
     [UMSocialSnsService presentSnsController:self appKey:UMKEY shareText:str shareImage:self.imageView.image shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToRenren,nil] delegate:nil];
 }
--(NSUInteger)supportedInterfaceOrientations{
-    return  UIInterfaceOrientationMaskLandscape;
-}
+//-(NSUInteger)supportedInterfaceOrientations{
+//    return  UIInterfaceOrientationMaskLandscape;
+//}
 
 
 - (void)viewDidLoad {

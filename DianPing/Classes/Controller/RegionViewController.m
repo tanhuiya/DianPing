@@ -39,32 +39,27 @@
     
 //    MetaDataTool* tool=[MetaDataTool shardWithDataTool];
 //    City* city=[tool getCityWithName:@"南京"];
-//    NSArray* subRegion=self.city.regions;
-//    dropmenu.items=subRegion;
-    self.preferredContentSize=CGSizeMake(400, 400);
+    NSArray* subRegion=self.city.regions;
+    _dropmenu.items=subRegion;
+//    self.preferredContentSize=CGSizeMake(400, 400);
 }
 -(void)setCity:(City *)city{
     _city=city;
     self.dropmenu.items=city.regions;
     
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 - (IBAction)changeCity:(id)sender {
 //    if(self.changeCityBlock){
 //        self.changeCityBlock();
 //    }
-    UIPopoverController* pop=[self valueForKeyPath:@"popoverController"];
-    [pop dismissPopoverAnimated:YES];
+//    UIPopoverController* pop=[self valueForKeyPath:@"popoverController"];
+//    [pop dismissPopoverAnimated:YES];
     
     CitySelectedController* city=[[CitySelectedController alloc]init];
-    city.modalPresentationStyle=UIModalPresentationFormSheet;
-    [self presentViewController:city animated:YES completion:nil];
-    
+//    city.modalPresentationStyle=UIModalPresentationFormSheet;
+//    [self presentViewController:city animated:YES completion:nil];
+    [self.navigationController pushViewController:city animated:NO];
 }
 
 #pragma mark -DropDownNoteDelegate
@@ -73,7 +68,8 @@
     NSArray* regions=region.subregions;
     if(regions.count==0){
         [[NSNotificationCenter defaultCenter]postNotificationName:RegionSelectedNotification object:nil userInfo:@{RegionParam:region}];
-        [self dismissViewControllerAnimated:YES completion:nil];
+//        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 -(void)clickWithMainIndex:(int)mainIndex andSubIndex:(int)subIndex{
@@ -84,7 +80,8 @@
     dict[RegionParam]=region;
     dict[SubRegionParam]=subRe;
     [[NSNotificationCenter defaultCenter]postNotificationName:RegionSelectedNotification object:nil userInfo:dict];
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)setSelectedRegion:(Region *)selectedRegion{

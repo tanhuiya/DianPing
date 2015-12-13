@@ -105,6 +105,10 @@
 		F5875D801C1BDBCE007B5500 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5875D7E1C1BDBCE007B5500 /* MapViewController.xib */; };
 		F5875D831C1BDD16007B5500 /* PriceLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F5875D821C1BDD16007B5500 /* PriceLabel.m */; };
 		F5875D851C1BDE4B007B5500 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5875D841C1BDE4B007B5500 /* SystemConfiguration.framework */; };
+		F5875D8B1C1C4276007B5500 /* categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5875D871C1C4276007B5500 /* categories.plist */; };
+		F5875D8C1C1C4276007B5500 /* cities.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5875D881C1C4276007B5500 /* cities.plist */; };
+		F5875D8D1C1C4276007B5500 /* cityGroups.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5875D891C1C4276007B5500 /* cityGroups.plist */; };
+		F5875D8E1C1C4276007B5500 /* sorts.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5875D8A1C1C4276007B5500 /* sorts.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -318,6 +322,10 @@
 		F5875D811C1BDD16007B5500 /* PriceLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceLabel.h; sourceTree = "<group>"; };
 		F5875D821C1BDD16007B5500 /* PriceLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceLabel.m; sourceTree = "<group>"; };
 		F5875D841C1BDE4B007B5500 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F5875D871C1C4276007B5500 /* categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = categories.plist; sourceTree = "<group>"; };
+		F5875D881C1C4276007B5500 /* cities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cities.plist; sourceTree = "<group>"; };
+		F5875D891C1C4276007B5500 /* cityGroups.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = cityGroups.plist; sourceTree = "<group>"; };
+		F5875D8A1C1C4276007B5500 /* sorts.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sorts.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -395,6 +403,7 @@
 				F5875C2B1C1B07B4007B5500 /* Assets.xcassets */,
 				F5875C2D1C1B07B4007B5500 /* LaunchScreen.storyboard */,
 				F5875C301C1B07B4007B5500 /* Info.plist */,
+				F5875D861C1C4276007B5500 /* Plists */,
 				F5875C1F1C1B07B4007B5500 /* Supporting Files */,
 			);
 			path = DianPing;
@@ -866,6 +875,17 @@
 			name = TopMenu;
 			sourceTree = "<group>";
 		};
+		F5875D861C1C4276007B5500 /* Plists */ = {
+			isa = PBXGroup;
+			children = (
+				F5875D871C1C4276007B5500 /* categories.plist */,
+				F5875D881C1C4276007B5500 /* cities.plist */,
+				F5875D891C1C4276007B5500 /* cityGroups.plist */,
+				F5875D8A1C1C4276007B5500 /* sorts.plist */,
+			);
+			path = Plists;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -977,7 +997,9 @@
 				F5875C7B1C1BBDED007B5500 /* DealVIewCell.xib in Resources */,
 				F5875D4B1C1BD80A007B5500 /* CitySelectedController.xib in Resources */,
 				F5875D781C1BDB54007B5500 /* DealsTopMenu.xib in Resources */,
+				F5875D8E1C1C4276007B5500 /* sorts.plist in Resources */,
 				F5875CC61C1BD6FE007B5500 /* MBProgressHUD.bundle in Resources */,
+				F5875D8D1C1C4276007B5500 /* cityGroups.plist in Resources */,
 				F5875D2E1C1BD716007B5500 /* UMSCommentInputController.xib in Resources */,
 				F5875D341C1BD716007B5500 /* UMSShareListController.xib in Resources */,
 				F5875D311C1BD716007B5500 /* UMShareEditViewControlleriPad.xib in Resources */,
@@ -988,11 +1010,13 @@
 				F5875D5D1C1BD867007B5500 /* SortViewController.xib in Resources */,
 				F5875D301C1BD716007B5500 /* UMShareEditViewController.xib in Resources */,
 				F5875D2B1C1BD716007B5500 /* UMSocialLocalizable.strings in Resources */,
+				F5875D8C1C1C4276007B5500 /* cities.plist in Resources */,
 				F5875D331C1BD716007B5500 /* UMSnsAccountViewController.xib in Resources */,
 				F5875D351C1BD716007B5500 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				F5875C2F1C1B07B4007B5500 /* LaunchScreen.storyboard in Resources */,
 				F5875D321C1BD716007B5500 /* UMSLoginViewController.xib in Resources */,
 				F5875D2F1C1BD716007B5500 /* UMSCommentInputControlleriPad.xib in Resources */,
+				F5875D8B1C1C4276007B5500 /* categories.plist in Resources */,
 				F5875D041C1BD708007B5500 /* MJRefresh.bundle in Resources */,
 				F5875C2C1C1B07B4007B5500 /* Assets.xcassets in Resources */,
 			);
