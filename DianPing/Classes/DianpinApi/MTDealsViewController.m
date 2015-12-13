@@ -29,8 +29,9 @@
 #import "DealHistoryController.h"
 #import "DealColletionController.h"
 #import "SearchViewController.h"
-#import "MapViewController.h"
+//#import "MapViewController.h"
 #import "MBProgressHUD+NJ.h"
+#import "CollectionHeadView.h"
 
 @interface MTDealsViewController()<AwesomeMenuDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 @property(strong,nonatomic)AwesomeMenu* menu;
@@ -222,6 +223,21 @@
     self.collectionView.footer.hidden=self.deals.count==self.total;
     return [super collectionView:collectionView numberOfItemsInSection:section];
 }
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    CollectionHeadView* reuseView=nil;
+    if(kind==UICollectionElementKindSectionHeader){
+        reuseView=(CollectionHeadView*)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headReuser" forIndexPath:indexPath];
+        UIView * bottom = [UIView new];
+        bottom.size = CGSizeMake(self.view.width, 100);
+//        bottom.backgroundColor = [UIColor yellowColor];
+        [reuseView addSubview:bottom];
+    }
+    return reuseView;
+}
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    CGSize size={320,200};
+    return size;
+}
 
 -(void)setCollectionView{
     [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]];
@@ -233,18 +249,13 @@
     
 }
 
-//-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator{
-//    
-//}
+
 
 -(void)setRightBarButton{
-    UIBarButtonItem* Map_item=[UIBarButtonItem itemWithTarget:self action:@selector(MapClicked) image:@"icon_map" highImage:@"icon_map_highlighted"];
-    Map_item.customView.width=50;
-    Map_item.customView.height=30;
     UIBarButtonItem* Serach_item=[UIBarButtonItem itemWithTarget:self action:@selector(SearchClicked) image:@"icon_search" highImage:@"icon_search"];
-    Serach_item.customView.width=Map_item.customView.width;
-    Serach_item.customView.height=Map_item.customView.height;
-    self.navigationItem.rightBarButtonItems=@[Map_item,Serach_item];
+    Serach_item.customView.width=50;
+    Serach_item.customView.height=30;
+    self.navigationItem.rightBarButtonItems=@[Serach_item];
 }
 -(void)setLeftBarButton{
 //    UIBarButtonItem* Icon=[UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_meituan_logo" highImage:@"icon_meituan_logo"];
@@ -302,11 +313,7 @@
     return @"icon_deals_empty";
 }
 #pragma mark - 右边导航栏
--(void)MapClicked{
-    MapViewController* svc = [[MapViewController alloc]init];
-    MTNavigationController* nvc=[[MTNavigationController alloc]initWithRootViewController:svc];
-    [self presentViewController:nvc animated:YES completion:nil];
-}
+
 -(void)SearchClicked{
     SearchViewController* svc = [[SearchViewController alloc]init];
     svc.selectedCity=self.selectedCity;

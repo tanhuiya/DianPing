@@ -12,7 +12,8 @@
 #import "DetailDealController.h"
 #import "DealViewCell.h"
 #import "Masonry.h"
-
+#import "MTNavigationController.h"
+#import "CollectionHeadView.h"
 @interface DealListController ()<CoverClickDelegate>
 @property(nonatomic,strong)EmptyView* emptyview;
 
@@ -49,8 +50,10 @@ static NSString * const reuseIdentifier = @"Cell";
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     [self.collectionView registerNib:[UINib nibWithNibName:@"DealVIewCell"  bundle:nil]  forCellWithReuseIdentifier:@"deal"];
+    [self.collectionView registerClass:[CollectionHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headReuser"];
     // Do any additional setup after loading the view.
     [self setCollectionView];
+
 }
 -(void)setCollectionView{
     [self.view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]];
@@ -84,10 +87,12 @@ static NSString * const reuseIdentifier = @"Cell";
     self.emptyview.hidden=self.deals.count!=0;
     return self.deals.count;
 }
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     DetailDealController* controller=[[DetailDealController alloc]init];
     controller.deal=self.deals[indexPath.item];
-    [self presentViewController:controller animated:YES completion:nil];
+    MTNavigationController* mvc = [[MTNavigationController alloc]initWithRootViewController:controller];
+    [self presentViewController:mvc animated:YES completion:nil];
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     DealViewCell* cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"deal" forIndexPath:indexPath];
@@ -95,7 +100,5 @@ static NSString * const reuseIdentifier = @"Cell";
     cell.deal=self.deals[indexPath.item];
     return cell;
 }
--(NSUInteger)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscape;
-}
+
 @end

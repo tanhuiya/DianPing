@@ -17,6 +17,7 @@
 #import "UMSocial.h"
 #import "MBProgressHUD+NJ.h"
 #import "DealLoaclTool.h"
+#import "DealBuyController.h"
 @interface DetailDealController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *Title;
 @property (weak, nonatomic) IBOutlet UILabel *decs;
@@ -29,15 +30,35 @@
 @property (weak, nonatomic) IBOutlet UIButton *leftTime;
 @property (weak, nonatomic) IBOutlet UIButton *timeOutChange;
 @property (weak, nonatomic) IBOutlet UIButton *saleNumber;
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) UIActivityIndicatorView* loadingView;
 @end
 
 @implementation DetailDealController
-- (IBAction)dismissController:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+
+#pragma mark CircleLife
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+//    self.webView.delegate=self;
+    
+//    [self setupRight];
+    [self setupNav];
+    [self setupLeft];
+    //保存
+    [[DealLoaclTool shardWithLocalTool]addHistoryDeal:self.deal];
+    
+    if([[[DealLoaclTool shardWithLocalTool]getCollectionDeals] containsObject:self.deal]){
+        self.coucang.selected=YES;
+    }
 }
+#pragma mark Actions
+
 - (IBAction)buyClicked:(id)sender {
+    DealBuyController * vc = [[DealBuyController alloc]init];
+    vc.urlStr=self.deal.deal_h5_url;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (IBAction)shouCang:(UIButton*)button {
     if(!button.selected){
@@ -46,7 +67,7 @@
     }else{
         [[DealLoaclTool shardWithLocalTool]removeCollectionDeal:self.deal];
         [MBProgressHUD showSuccess:@"取消收藏" toView:self.view];
-
+        
     }
     button.selected=!button.isSelected;
     
@@ -55,26 +76,15 @@
     NSString* str=[NSString stringWithFormat:@"[%@]  %@  %@ ",self.Title.text,self.decs.text,self.deal.deal_h5_url];
     [UMSocialSnsService presentSnsController:self appKey:UMKEY shareText:str shareImage:self.imageView.image shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToRenren,nil] delegate:nil];
 }
-//-(NSUInteger)supportedInterfaceOrientations{
-//    return  UIInterfaceOrientationMaskLandscape;
-//}
 
+-(void)dismissVC{
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    self.webView.delegate=self;
-    
-    [self setupRight];
-    [self setupLeft];
-    //保存
-    [[DealLoaclTool shardWithLocalTool]addHistoryDeal:self.deal];
-    
-    if([[[DealLoaclTool shardWithLocalTool]getCollectionDeals] containsObject:self.deal]){
-        self.coucang.selected=YES;
-    }
-        
-    
+#pragma mark PrivateMethod
+-(void)setupNav{
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"btn_navigation_close"] style:UIBarButtonItemStyleDone target:self action:@selector(dismissVC)];
+    self.navigationItem.title=@"商品详情";
 }
 - (void)updataLeftData{
     self.Title.text=self.deal.title;
@@ -84,8 +94,7 @@
     self.timeOut.selected=self.deal.restrictions.is_refundable;
     self.timeOutChange.selected=self.deal.restrictions.is_reservation_required;
     [self.saleNumber setTitle:[NSString stringWithFormat:@"已售%d",self.deal.purchase_count] forState:UIControlStateNormal];
-    [self.imageView setImageWithURL:[NSURL URLWithString:self.deal.image_url] placeholderImage:[UIImage imageNamed:@"placeholder_deal"] ];
-    
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.deal.image_url]  placeholderImage:[UIImage imageNamed:@"placeholder_deal"]];
     NSDateFormatter* fomatter=[[NSDateFormatter alloc]init];
     fomatter.dateFormat=@"yyyy-MM-dd";
     NSDate * endData=[[fomatter dateFromString:self.deal.purchase_deadline]dateByAddingTimeInterval:24*3600];
@@ -112,18 +121,18 @@
         NSLog(@"加载失败");
     }];
 }
-- (void)setupRight{
-    NSURL* url=[NSURL URLWithString:self.deal.deal_h5_url];
-    NSURLRequest* request=[NSURLRequest requestWithURL:url];
-    
-    UIActivityIndicatorView* loadingView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [self.webView addSubview:loadingView];
-    
-    [loadingView autoCenterInSuperview];
-    [loadingView startAnimating];
-    [self.webView loadRequest:request];
-    self.loadingView=loadingView;
-}
+//- (void)setupRight{
+//    NSURL* url=[NSURL URLWithString:self.deal.deal_h5_url];
+//    NSURLRequest* request=[NSURLRequest requestWithURL:url];
+//    
+//    UIActivityIndicatorView* loadingView=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    [self.webView addSubview:loadingView];
+//    
+//    [loadingView autoCenterInSuperview];
+//    [loadingView startAnimating];
+//    [self.webView loadRequest:request];
+//    self.loadingView=loadingView;
+//}
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     [self.loadingView removeFromSuperview];
