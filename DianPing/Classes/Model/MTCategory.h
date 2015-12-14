@@ -26,4 +26,6 @@
 
 /** 显示在地图上的图标 */
 @property (nonatomic, copy) NSString *map_icon;
+
+@property(nonatomic,strong)NSString* circle;
 @end

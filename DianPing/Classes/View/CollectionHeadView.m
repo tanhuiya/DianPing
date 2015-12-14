@@ -9,6 +9,7 @@
 #import "CollectionHeadView.h"
 #import "CateroryBtn.h"
 #import "Masonry.h"
+#import "MetaDataTool.h"
 
 @interface CollectionHeadView ()
 @property(strong,nonatomic)UIScrollView * scrollView;
@@ -22,7 +23,7 @@
         [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self);
         }];
-        self.categories= @[@1,@2,@2,@4,@4,@4,@4,@8,@4,@6];
+        self.categories=[MetaDataTool shardWithDataTool].categories;
 //        self.scrollView.frame=CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 200);
         [self addButtons];
     }
@@ -52,6 +53,7 @@
     int row =2,col =4;
     CGFloat width = [UIScreen mainScreen].bounds.size.width/4;
     CGFloat height = 80;
+    NSInteger index =0;
     for(int i=0; i<page;i++){
         if(i!=page-1){
             for(int j=0;j<8;j++){
@@ -61,6 +63,7 @@
                 }else{
                     btn.frame=CGRectMake((j-4)*width, height, width, height);
                 }
+                btn.category=self.categories[index++];
                 [self.scrollView addSubview:btn];
 //                for (int k=0; k<col; k++) {
 //                    CateroryBtn* btn =[[CateroryBtn alloc]init];
@@ -77,6 +80,7 @@
                 }else{
                     btn.frame=CGRectMake((page-1)*width+(j-4)*width, height, width, height);
                 }
+                btn.category=self.categories[index++];
                 [self.scrollView addSubview:btn];
             }
         }

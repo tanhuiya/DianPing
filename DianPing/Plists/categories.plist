@@ -5,6 +5,8 @@
 	<dict>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_-1</string>
+		<key>circle</key>
+		<string>findhome_more</string>
 		<key>icon</key>
 		<string>icon_category_-1</string>
 		<key>name</key>
@@ -19,6 +21,8 @@
 		<string>icon_category_highlighted_1</string>
 		<key>icon</key>
 		<string>icon_category_1</string>
+		<key>circle</key>
+		<string>findhome_food</string>
 		<key>name</key>
 		<string>美食</string>
 		<key>small_highlighted_icon</key>
@@ -75,6 +79,8 @@
 	<dict>
 		<key>map_icon</key>
 		<string>ic_category_20</string>
+		<key>circle</key>
+		<string>findhome_hotel</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_20</string>
 		<key>icon</key>
@@ -103,6 +109,8 @@
 	<dict>
 		<key>map_icon</key>
 		<string>ic_category_99</string>
+		<key>circle</key>
+		<string>findhome_movie</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_99</string>
 		<key>icon</key>
@@ -119,6 +127,8 @@
 		<string>ic_category_2</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_2</string>
+		<key>circle</key>
+		<string>findhome_xiuxian</string>
 		<key>icon</key>
 		<string>icon_category_2</string>
 		<key>name</key>
@@ -151,6 +161,8 @@
 		<string>ic_category_3</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_3</string>
+		<key>circle</key>
+		<string>findhome_icon_village</string>
 		<key>icon</key>
 		<string>icon_category_3</string>
 		<key>name</key>
@@ -184,6 +196,8 @@
 	<dict>
 		<key>map_icon</key>
 		<string>ic_category_3</string>
+		<key>circle</key>
+		<string>findhome_imarry</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_3</string>
 		<key>icon</key>
@@ -220,6 +234,8 @@
 		<string>ic_category_22</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_22</string>
+		<key>circle</key>
+		<string>findhome_beauty</string>
 		<key>icon</key>
 		<string>icon_category_22</string>
 		<key>name</key>
@@ -247,6 +263,8 @@
 		<string>ic_category_78</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_78</string>
+		<key>circle</key>
+		<string>findhome_zhoubianyou</string>
 		<key>icon</key>
 		<string>icon_category_78</string>
 		<key>name</key>
@@ -261,6 +279,8 @@
 		<string>ic_category_4</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_4</string>
+		<key>circle</key>
+		<string>findhome_shoppingmall</string>
 		<key>icon</key>
 		<string>icon_category_4</string>
 		<key>name</key>
@@ -289,6 +309,8 @@
 		<string>ic_category_5</string>
 		<key>highlighted_icon</key>
 		<string>icon_category_highlighted_5</string>
+		<key>circle</key>
+		<string>findhome_discount</string>
 		<key>icon</key>
 		<string>icon_category_5</string>
 		<key>name</key>
