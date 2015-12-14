@@ -18,7 +18,9 @@
 //        [self setBackgroundColor:[self randomColor]];
         self.titleLabel.textAlignment=NSTextAlignmentCenter;
         [self setTitleColor:[UIColor colorWithRed:45/255.0 green:45/255.0 blue:45/255.0 alpha:1.0] forState:UIControlStateNormal];
-        self.titleLabel.font=[UIFont systemFontOfSize:15];
+        self.titleLabel.font=[UIFont systemFontOfSize:12];
+        self.imageView.contentMode=UIViewContentModeScaleAspectFit;
+        [self setContentMode:UIViewContentModeScaleAspectFit];
     }
     return self;
 }
@@ -26,7 +28,7 @@
     return bounds;
 }
 -(CGRect)imageRectForContentRect:(CGRect)contentRect{
-    return CGRectMake((contentRect.size.width-50)*0.5, 5, 50, 50);
+    return CGRectMake((contentRect.size.width-50)*0.5, 5, 50, 52);
 }
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
     return CGRectMake(0, 60, contentRect.size.width, contentRect.size.height-60);

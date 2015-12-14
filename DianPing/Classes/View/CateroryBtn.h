@@ -8,6 +8,7 @@
 #import "MTCategory.h"
 #import <UIKit/UIKit.h>
 
+#define BtnWidth 50
 @interface CateroryBtn : UIButton
 @property(nonatomic,strong)MTCategory* category;
 @end

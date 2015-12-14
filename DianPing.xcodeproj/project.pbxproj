@@ -979,6 +979,7 @@
 				TargetAttributes = {
 					F5875C1B1C1B07B4007B5500 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = 3H96442V9Q;
 					};
 					F5875C341C1B07B5007B5500 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -1326,6 +1327,8 @@
 			baseConfigurationReference = 0324E51F009FA256D26361C5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DianPing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -1342,6 +1345,8 @@
 			baseConfigurationReference = D5A99E27479AA0881D3DE0F8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DianPing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (

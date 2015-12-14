@@ -227,15 +227,15 @@
     CollectionHeadView* reuseView=nil;
     if(kind==UICollectionElementKindSectionHeader){
         reuseView=(CollectionHeadView*)[collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headReuser" forIndexPath:indexPath];
-        UIView * bottom = [UIView new];
-        bottom.size = CGSizeMake(self.view.width, 100);
+//        UIView * bottom = [UIView new];
+//        bottom.size = CGSizeMake(self.view.width, 100);
 //        bottom.backgroundColor = [UIColor yellowColor];
-        [reuseView addSubview:bottom];
+//        [reuseView addSubview:bottom];
     }
     return reuseView;
 }
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    CGSize size={320,200};
+    CGSize size={320,210};
     return size;
 }
 
