@@ -12,17 +12,19 @@
 
 +(void)initialize{
     UINavigationBar* bar=[UINavigationBar appearance];
-    [bar setBackgroundImage:[UIImage imageNamed:@"bg_navigationBar_normal"] forBarMetrics:UIBarMetricsDefault];
+    [bar setBackgroundImage:[UIImage imageNamed:@""] forBarMetrics:UIBarMetricsDefault];
     
+    [bar setBarTintColor:[UIColor colorWithRed:241/255.0 green:155/255.0 blue:56/255.0 alpha:1.0]];
     UIBarButtonItem* barItem=[UIBarButtonItem appearance];
     
     NSMutableDictionary* dict=[NSMutableDictionary dictionary];
-    dict[NSForegroundColorAttributeName]=[UIColor blackColor];
+    dict[NSForegroundColorAttributeName]=[UIColor whiteColor];
     [barItem setTitleTextAttributes:dict forState:UIControlStateNormal];
     
     NSMutableDictionary* dictH=[NSMutableDictionary dictionary];
     dict[NSForegroundColorAttributeName]=[UIColor grayColor];
     [barItem setTitleTextAttributes:dictH forState:UIControlStateDisabled];
+    
 }
 //-(NSUInteger)supportedInterfaceOrientations{
 //    return UIInterfaceOrientationMaskLandscape;

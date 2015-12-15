@@ -32,13 +32,15 @@
 //#import "MapViewController.h"
 #import "MBProgressHUD+NJ.h"
 #import "CollectionHeadView.h"
+#import "TitleButton.h"
 
 @interface MTDealsViewController()<AwesomeMenuDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 @property(strong,nonatomic)AwesomeMenu* menu;
 @property(strong,nonatomic)DealsTopMenu *CategoryMenu;
 @property(strong,nonatomic)DealsTopMenu *CityMenu;
 @property(strong,nonatomic)DealsTopMenu *SortMenu;
-
+@property(nonatomic,strong)TitleButton* CityBtn;
+@property(nonatomic,strong)TitleButton* CategoryBtn;
 
 @property(nonatomic,strong)City* selectedCity;
 @property(nonatomic,strong)Region* selectedRegion;
@@ -83,7 +85,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(categoryClicked:) name:CategorySelectedNotification object:nil];
 }
 
-//
+
 -(void)cityClicked:(NSNotification*)note{
 //    RegionViewController* rvc=(RegionViewController*) self.regionPop.contentViewController;
 //    rvc.city=note.userInfo[CityParam];
@@ -258,8 +260,6 @@
     self.navigationItem.rightBarButtonItems=@[Serach_item];
 }
 -(void)setLeftBarButton{
-//    UIBarButtonItem* Icon=[UIBarButtonItem itemWithTarget:nil action:nil image:@"icon_meituan_logo" highImage:@"icon_meituan_logo"];
-//    Icon.enabled=NO;
     DealsTopMenu* CategoryMenu=[DealsTopMenu menu];
     [CategoryMenu.imageButton setImage:[UIImage imageNamed:@"icon_category_highlighted_0"] forState:UIControlStateHighlighted];
     [CategoryMenu.imageButton setImage:[UIImage imageNamed:@"icon_category_0"] forState:UIControlStateNormal];
@@ -285,6 +285,7 @@
     UIBarButtonItem* item3=[[UIBarButtonItem alloc]initWithCustomView:SortMenu];
     self.SortMenu=SortMenu;
     self.navigationItem.leftBarButtonItems=@[item1,item2,item3];
+
 }
 #pragma mark - 左边导航栏
 -(void)categoryMenuClicked{
